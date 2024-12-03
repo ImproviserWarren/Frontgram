@@ -1,9 +1,9 @@
 const { Router } = require("express")
-const { spreadLike, validateLiker } = require("../controllers/likeController")
+const likePost = require("../controllers/likeController")
 
 const likeRoute = Router()
 
-likeRoute.put('/likePost', spreadLike, validateLiker)
+likeRoute.put('/likePost', likePost)
 
 
 module.exports = likeRoute

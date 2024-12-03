@@ -1,2 +1,4 @@
 node_modules
 package-lock.json
+
+//     date: { type: Date, default: Date.now() },
