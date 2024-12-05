@@ -7,7 +7,6 @@ const commentRoute = require("./routes/commentRoute.js")
 const likePost = require("./routes/likeRoute.js")
  
 const app = express()
-const port = 8080
 app.use(express.json())
 app.use(cors())
  
@@ -21,6 +20,6 @@ app.get('/users')
 connectDatabase()
  
 app.listen(port, () => {
-    console.log(`your backend server is running on ${port}`)
+    console.log(`Started running`)
 })
  
