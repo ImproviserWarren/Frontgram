@@ -19,7 +19,7 @@ app.get('/users')
 
 connectDatabase()
  
-app.listen(port, () => {
+app.listen(() => {
     console.log(`Started running`)
 })
  
