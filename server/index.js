@@ -17,7 +17,7 @@ app.use(postRoute)
 app.use(commentRoute)
 app.use(likePost)
 
-app.get('/users')
+
 
 
 connectDatabase()
