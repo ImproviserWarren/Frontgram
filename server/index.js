@@ -18,6 +18,9 @@ app.use(commentRoute)
 app.use(likePost)
 
 app.get('/users')
+app.get('/', (req, res) => {
+    res.status(200).send({ message: "Hello"})
+})
 
 connectDatabase()
 
