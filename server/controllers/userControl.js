@@ -1,6 +1,7 @@
 const userModel = require("../database/schema/userModel")
 const factModel = require("../database/schema/postModel")
 const bcrypt = require('bcrypt');
+
  
 const createUser = async (req, res) => {
     const userData = req.body
