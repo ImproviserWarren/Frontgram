@@ -18,6 +18,18 @@ const getPost = async (req, res) => {
         console.log(error)
     }
 }
+
+const postPopulation = async (req, res) => {
+    const { postId } = req.query;
+    const response = await postModel.find(postId).populate({
+        path: "Comments",
+        populate: {
+            UserId: "UserId",
+            select: "username profileImage"
+        }
+    })
+    res.send(response)
+}
  
  
 const deletePost = async (req, res) => {
@@ -32,5 +44,5 @@ const deletePost = async (req, res) => {
 }
 
  
-module.exports = { createPost, getPost, deletePost }
+module.exports = { createPost, getPost, deletePost, postPopulation }
  

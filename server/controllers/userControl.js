@@ -51,7 +51,7 @@ const validateEmail = async(req, res, next) => {
 
 const getUserWPost = async(req, res) => {
     try {
-       const post = await userModel.find().populate("posts", "postImg captin")
+       const post = await userModel.find().populate("posts", "postImg caption")
     res.status(200).send(post)
     } catch (error) {
         res.send(error)
