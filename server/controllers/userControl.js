@@ -1,6 +1,8 @@
 const userModel = require("../database/schema/userModel")
 const factModel = require("../database/schema/postModel")
 const bcrypt = require('bcrypt');
+const jwt =  require('jsonwebtoken')
+
 
 require('dotenv').config()
 
@@ -30,8 +32,7 @@ const createUser = async (req, res) => {
 }
  
 const loginUser = async (req, res) => {
-    const email = req.body.email
-    const password = req.body.password
+    const { email, password } = req.body
     try {
         const user = await userModel.findOne({ email: email })
         const hashedPassword = user.password
@@ -84,7 +85,20 @@ const followUser = async (req, res) => {
     }
 }
 
+const userAuthentication = (req, res, next) => {
+    const header = req.headers['authorization']
+
+    if (typeof header !== 'undefined'){
+        const bearer = header.split(' ')
+        const token = bearer[1]
+        req.token = token
+        next();
+    } else {
+        res.status(404)
+    }
+}
+
 
  
-module.exports = { createUser, loginUser, validateEmail, getUserWPost, followUser }
+module.exports = { createUser, loginUser, validateEmail, getUserWPost, followUser, userAuthentication }
  

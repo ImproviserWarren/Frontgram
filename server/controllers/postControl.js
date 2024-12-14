@@ -12,7 +12,7 @@ const createPost = async (req, res) => {
  
 const getPost = async (req, res) => {
     try {
-        const fact = await postModel.find({})
+        const fact = await postModel.find().populate('UserId', 'profileImage username')
         res.status(200).send(fact)
     } catch (error) {
         console.log(error)
