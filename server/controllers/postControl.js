@@ -20,15 +20,22 @@ const getPost = async (req, res) => {
 }
 
 const postPopulation = async (req, res) => {
-    const { postId } = req.query;
-    const response = await postModel.find(postId).populate({
-        path: "Comments",
-        populate: {
-            UserId: "UserId",
-            select: "username profileImage"
+    try {
+        const { postId } = req.query;
+        const response = await postModel.findById(postId).populate({
+            path: "Comments",
+            populate: {
+                UserId: "UserId",
+                select: "username profileImage"
+            }
+        });
+        if (!response){
+            return res.status(404).json({ Error: "SOmething"})
         }
-    })
-    res.send(response)
+        res.send(response)
+    } catch (error){
+        res.status(404).json({ error: "Some error"})
+    }
 }
  
  

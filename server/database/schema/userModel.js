@@ -7,8 +7,7 @@ const userSchema = new Schema({
     profileImage: { type: String },
     bio: { type: String },
     followers: [{ type: Schema.Types.ObjectId, ref: "Users"}],
-    following: [{ type: Schema.Types.ObjectId, ref: "Users"}],
-    posts: [{ type: Schema.Types.ObjectId, ref: 'post'}]
+    following: [{ type: Schema.Types.ObjectId, ref: "Users"}]
 },
 { timestamps: true }
 )
