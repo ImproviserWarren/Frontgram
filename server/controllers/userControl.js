@@ -4,23 +4,28 @@ const bcrypt = require('bcrypt');
 
  
 const createUser = async (req, res) => {
-    const userData = req.body
-    console.log(userData)
+    const { username, email, password } =req.body
     const saltRounds = 10;
-    const password = userData.password
-    const hash = bcrypt.hashSync(password, saltRounds)
-    console.log('password', password)
-    console.log('hashedPassword', hash)
-
-    const data = { ...userData, password: hash }
     try {
-        await userModel.create(data)
-        res.status(200).send({ message: 'user created' })
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const createdUser = await userModel.create({
+        username,
+        email,
+        password: hashedPassword
+    });
+    const token = jwt.sign({
+        UserId: createdUser._id,
+        username: createdUser.username
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: '24h' }
+);
+      res.send({ token })
     } catch (error) {
-        res.status(500).send(error)
+        res.json({ message: "bad "})
     }
+
 }
- 
  
 const loginUser = async (req, res) => {
     const email = req.body.email

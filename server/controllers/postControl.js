@@ -21,22 +21,22 @@ const getPost = async (req, res) => {
 
 const postPopulation = async (req, res) => {
     try {
-        const { postId } = req.query; // Get postId from query
-        if (!postId) return res.status(400).json({ error: "Post ID is required" });
-
+        const { postId } = req.query;
         const response = await postModel.findById(postId).populate({
             path: "Comments",
-            populate: { path: "UserId", select: "username profileImage" }
+            populate: {
+                UserId: "UserId",
+                select: "username profileImage"
+            }
         });
-
-        if (!response) return res.status(404).json({ error: "Post not found" });
-
-        res.status(200).json(response);
-    } catch (error) {
-        res.status(500).json({ error: "Internal server error" });
+        if (!response){
+            return res.status(404).json({ Error: "SOmething"})
+        }
+        res.send(response)
+    } catch (error){
+        res.status(404).json({ error: "Some error"})
     }
-};
-
+}
  
  
 const deletePost = async (req, res) => {
