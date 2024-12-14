@@ -2,6 +2,8 @@ const userModel = require("../database/schema/userModel")
 const factModel = require("../database/schema/postModel")
 const bcrypt = require('bcrypt');
 
+require('dotenv').config()
+
  
 const createUser = async (req, res) => {
     const { username, email, password } =req.body
