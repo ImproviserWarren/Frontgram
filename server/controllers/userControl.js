@@ -85,19 +85,27 @@ const followUser = async (req, res) => {
     }
 }
 
-const userAuthentication = (req, res, next) => {
-    const header = req.headers['authorization']
 
-    if (typeof header !== 'undefined'){
-        const bearer = header.split(' ')
-        const token = bearer[1]
-        req.token = token
-        next();
-    } else {
-        res.status(404)
-    }
+
+const userAuthentication = (req, res, next) => {
+    jwt.verify(req.token, 'privatekey', (error,verifiedData) => {
+        if(error){
+            console.log("bad")
+        } else {
+            res.json({message: "Nice", verifiedData})
+        }
+    })
 }
 
+// const verifiedOutput = (req, res) => {
+//     jwt.verify(req.token, 'privatekey', (error,verifiedData) => {
+//         if(error){
+//             console.log("bad")
+//         } else {
+//             res.json({message: "Nice", verifiedData})
+//         }
+//     })
+// }
 
  
 module.exports = { createUser, loginUser, validateEmail, getUserWPost, followUser, userAuthentication }
