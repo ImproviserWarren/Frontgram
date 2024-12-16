@@ -19,6 +19,15 @@ const getPost = async (req, res) => {
     }
 }
 
+const getComments = async (req, res) => {
+    try {
+        const fact =  await postModel.find().populate('UserId', 'profileImage username comments')
+        res.status(200).send(fact)
+    } catch (error) {
+        res.send("Done")
+    }
+}
+
 const postPopulation = async (req, res) => {
     try {
         const { postId } = req.query;
@@ -51,5 +60,5 @@ const deletePost = async (req, res) => {
 }
 
  
-module.exports = { createPost, getPost, deletePost, postPopulation }
+module.exports = { createPost, getPost, deletePost, postPopulation, getComments }
  

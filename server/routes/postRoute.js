@@ -1,5 +1,5 @@
 const { Router } = require("express")
-const { createPost, getPost, deletePost, postPopulation } = require("../controllers/postControl")
+const { createPost, getPost, deletePost, postPopulation, getComments } = require("../controllers/postControl")
 const postModel = require("../database/schema/postModel")
 const postRoute = Router()
 
@@ -16,5 +16,6 @@ postRoute.get("/posts", async(req, res) => {
 })
 
 postRoute.get("/posts/:postId", postPopulation)
+
 
 module.exports = postRoute
