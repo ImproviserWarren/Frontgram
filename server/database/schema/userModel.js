@@ -6,8 +6,8 @@ const userSchema = new Schema({
     username: { type: String, required: true, unique: true},
     profileImage: { type: String },
     bio: { type: String },
-    followers: [{ type: Schema.Types.ObjectId, ref: "Users"}],
-    following: [{ type: Schema.Types.ObjectId, ref: "Users"}]
+    followers: [{ type: Schema.Types.ObjectId, ref: "users"}],
+    following: [{ type: Schema.Types.ObjectId, ref: "users"}]
 },
 { timestamps: true }
 )

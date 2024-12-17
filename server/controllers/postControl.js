@@ -14,6 +14,7 @@ const getPost = async (req, res) => {
     try {
         const fact = await postModel.find().populate('UserId', 'profileImage username')
         res.status(200).send(fact)
+        console.log(fact)
     } catch (error) {
         console.log(error)
     }
