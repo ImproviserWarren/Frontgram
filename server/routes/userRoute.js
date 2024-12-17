@@ -1,10 +1,7 @@
 const { Router } = require("express");
 const { createUser, loginUser, validateEmail, getUserWPost, followUser, userAuthentication } = require("../controllers/userControl");
 const userModel = require("../database/schema/userModel")
-import express from 'express'
-import cors from 'cors'
-const app = express()
-app.use(cors());
+
 
 const userRoute = Router();
 
