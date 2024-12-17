@@ -8,7 +8,7 @@ postRoute.get('/findPost', getPost)
 postRoute.delete('/deletePost', deletePost)
 postRoute.get("/posts", async(req, res) => {
     try {
-        const posts = await postModel.find();
+        const posts = await postModel.find().populate('UserId', 'profileImage username')
         res.send(posts)
     } catch (error){
         res.send(error)

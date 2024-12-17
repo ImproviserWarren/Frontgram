@@ -11,16 +11,12 @@ const createPost = async (req, res) => {
 }
  
 const getPost = async (req, res) => {
-   try {
-        // Fetch posts with populated user details and comments
-        const posts = await postModel.find()
-            .populate('UserId', 'profileImage username')  // Populating user info (profileImage, username)
-            .populate('comments');  // Populate comments (assuming comments are ObjectIds)
-
-        res.status(200).json(posts);  // Send the populated posts as JSON
+    try {
+        const fact = await postModel.find().populate('UserId', 'profileImage username')
+        res.status(200).send(fact)
+        console.log(fact)
     } catch (error) {
-        console.error(error);
-        res.status(500).send("Error fetching posts");
+        console.log(error)
     }
 }
 
