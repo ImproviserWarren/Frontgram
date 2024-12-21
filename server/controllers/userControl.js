@@ -36,6 +36,13 @@ const loginUser = async (req, res) => {
         const user = await userModel.findOne({ email: email })
         const hashedPassword = user.password
         const isUser = bcrypt.compareSync(password, hashedPassword)
+        const token = jwt.sign({
+            email,
+            password,
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: '24h' }
+    );
         if (isUser) {
             res.status(200).send({ message: "Sucessfully logged in" })
         } else {
