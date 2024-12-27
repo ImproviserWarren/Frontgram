@@ -44,6 +44,8 @@ const loginUser = async (req, res) => {
         { expiresIn: '24h' }
     );
         if (isUser) {
+            localStorage.setItem("Jwt", data.token)
+            localStorage.setItem("user", JSON.stringify(data.user))
             res.status(200).send({ message: "Sucessfully logged in" })
         } else {
             res.status(404).send({ message: "check password or email" })
