@@ -31,27 +31,29 @@ const createUser = async (req, res) => {
 }
  
 const loginUser = async (req, res) => {
-    const { email, password } = req.body
+    const { email, password } = req.body;
     try {
-        const user = await userModel.findOne({ email: email })
-        const hashedPassword = user.password
-        const isUser = bcrypt.compareSync(password, hashedPassword)
-        const token = jwt.sign({
-            email,
-            password,
-        },
-        process.env.JWT_SECRET,
-        { expiresIn: '24h' }
-    );
+        const user = await userModel.findOne({ email: email });
+        if (!user) {
+            return res.status(404).send({ message: "Check email or password" });
+        }
+        const isUser = await bcrypt.compare(password, user.password);
         if (isUser) {
-            res.status(200).send({ message: "Sucessfully logged in" })
+            const token = jwt.sign({
+                userId: user._id,
+                username: user.username
+            },
+            process.env.JWT_SECRET,
+            { expiresIn: '24h' });
+            return res.status(200).send({ message: "Successfully logged in", token });
         } else {
-            res.status(404).send({ message: "check password or email" })
+            return res.status(404).send({ message: "Check password or email" });
         }
     } catch (error) {
-        res.status(500).send(error)
+        return res.status(500).send(error);
     }
 }
+
 
 const validateEmail = async(req, res, next) => {
     const userData = req.body;

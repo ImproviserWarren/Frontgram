@@ -12,8 +12,8 @@ userRoute.post('/followUser', followUser)
 userRoute.get('/users', async (req, res) => {
     try {
     const users = await userModel.find()
-    const token = localStorage.getItem("authToken");
-    res.send(users, token)
+    res.send(users)
+
     } catch (error) {
         res.send(error)
     }
