@@ -31,7 +31,7 @@ const getComments = async (req, res) => {
 
 const postPopulation = async (req, res) => {
     try {
-        const { postId } = req.query;
+        const { postId } = req.query; 
         const response = await postModel.findById(postId).populate({
             path: "Comments",
             populate: {

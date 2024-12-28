@@ -45,12 +45,12 @@ const loginUser = async (req, res) => {
             },
             process.env.JWT_SECRET,
             { expiresIn: '24h' });
-            return res.status(200).send({ message: "Successfully logged in", token });
+            return res.status(200).send({ message: "Logged in", token });
         } else {
             return res.status(404).send({ message: "Check password or email" });
         }
     } catch (error) {
-        return res.status(500).send(error);
+        return res.status(404).send(error);
     }
 }
 
