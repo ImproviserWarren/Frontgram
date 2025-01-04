@@ -4,7 +4,7 @@ const likePost = async (req, res) => {
     try {
         await likeModel.findOneAndUpdate(postLiker, {
             $addToSet: {
-                PostId: postLiker
+                postId: postLiker
             },
         })
         await likeModel.findOneAndUpdate(likedPost, {
